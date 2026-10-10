@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,6 +8,7 @@
   <title>Deportiva ITSON · Componentes</title>
   <link rel="stylesheet" href="/src/estilos.css">
 </head>
+
 <body>
 
   <header class="encabezado">
@@ -18,9 +20,9 @@
     <div class="encabezado__carrito">
       <span>Carrito: <strong id="cuenta">0</strong></span>
       <!-- Paso 1: aquí va el <boton-app> -->
-        <button-app variante="peligro" id="vaciar">
-          Vaciar
-        </button-app>
+      <button-app variante="peligro" id="vaciar">
+        Vaciar
+      </button-app>
     </div>
   </header>
 
@@ -31,11 +33,21 @@
     </section>
 
     <!-- Paso 2: aquí va la rejilla de tarjetas -->
-      <section class="rejilla" id="rejilla" aria-label="Productos"></section>
+    <section class="rejilla" id="rejilla" aria-label="Productos"></section>
     <!-- Tarea: aquí pueden montar sus dos componentes nuevos. -->
-    <section class="tarea" id="tarea"></section>
+   
+    <section class="tarea" id="tarea">
+      <h2>Contenido del Carrito</h2>
+      <tabla-generica id="tabla-carrito"></tabla-generica>
+    </section>
+
+    <alerta-app tipo="exito">
+      ¡Bienvenido al Catálogo de Temporada Deportiva ITSON! Agrega tus productos favoritos.
+    </alerta-app>
+
   </main>
 
   <script type="module" src="/src/main.ts"></script>
 </body>
+
 </html>

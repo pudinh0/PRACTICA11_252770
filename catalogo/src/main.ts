@@ -1,5 +1,7 @@
 import './boton-app'
 import './tarjeta-producto';
+import './tabla.generica';
+import './alerta-app';
 import type { Producto } from './tipos';
 
 const rejilla = document.querySelector<HTMLElement>('#rejilla')!;
@@ -42,6 +44,19 @@ let enCarrito = 0;
 rejilla.addEventListener('agregar', (e) => {
   enCarrito++;
   cuenta.textContent = String(enCarrito);
+
+  const productoAgregar = e.detail;
+
+  const itemExistente = itemsEnCarrito.find(item => item.nombre === productoAgregar.nombre);
+  if (itemExistente) {
+    itemExistente.cantidad++;
+  } else {
+    itemsEnCarrito.push({ nombre: productoAgregar.nombre, precio: productoAgregar.precio, cantidad: 1 });
+  }
+
+  // Actualizar la tabla del carrito
+  tablaCarrito.filas = itemsEnCarrito;
+
   console.log('Agregado:', e.detail.nombre, e.detail.precio);
 });
 
@@ -49,4 +64,19 @@ rejilla.addEventListener('agregar', (e) => {
 vaciar.addEventListener('click', () => {
   enCarrito = 0;
   cuenta.textContent = '0';
-}); 
+});
+
+
+// tabla generica
+const tablaCarrito = document.querySelector('tabla-generica') as any;
+let itemsEnCarrito: { nombre: string; precio: number; cantidad: number }[] = [];
+
+// Definir columnas genéricas
+tablaCarrito.columnas = [
+  { clave: 'nombre', titulo: 'Producto' },
+  { clave: 'precio', titulo: 'Precio' },
+  { clave: 'cantidad', titulo: 'Cantidad' }
+];
+
+// Pasarle las filas (y actualizarlo cada vez que agregues o vacíes el carrito)
+tablaCarrito.filas = itemsEnCarrito;

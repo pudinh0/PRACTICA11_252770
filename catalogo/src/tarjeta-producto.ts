@@ -41,17 +41,26 @@ export class TarjetaProducto extends HTMLElement {
         </article>
         `;
 
-        const botonApp = this.shadowRoot!.querySelector("boton-app");
-        botonApp?.addEventListener('click', () => {
-        this.manejarClickBoton();
+    const botonApp = this.shadowRoot!.querySelector("boton-app");
+    botonApp?.addEventListener("click", () => {
+      this.manejarClickBoton();
     });
   }
 
   //evento que maneja el click del boton y lo envia a main.ts
   private manejarClickBoton() {
+    const id = this.getAttribute("producto-id") ?? "";
+    const nombre = this.getAttribute("nombre") ?? "";
+    const precio = Number(this.getAttribute("precio") ?? 0);
+
     const evento = new CustomEvent("agregar", {
+      detail: {
+        id: id,
+        nombre: nombre,
+        precio: precio,
+      },
       bubbles: true,
-      composed: true
+      composed: true,
     });
     this.dispatchEvent(evento);
   }
